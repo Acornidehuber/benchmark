@@ -144,7 +144,7 @@ void ConsoleReporter::PrintRunData(const Run& result) {
             cpu_time * 100, "%");
   } else if (result.run_type != Run::RT_Aggregate ||
              result.aggregate_unit == StatisticUnit::kTime) {
-    const char* timeLabel = GetTimeUnitString(result.time_unit);
+    const char* timeLabel = "test"; //GetTimeUnitString(result.time_unit);
     printer(Out, COLOR_YELLOW, "%s %-4s %s %-4s ", real_time_str.c_str(),
             timeLabel, cpu_time_str.c_str(), timeLabel);
   } else {
