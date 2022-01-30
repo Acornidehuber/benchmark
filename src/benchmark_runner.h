@@ -71,6 +71,7 @@ class BenchmarkRunner {
 
   const double min_time;
   const int repeats;
+  const TimeUnit time_unit_;
   const bool has_explicit_iteration_count;
 
   int num_repetitions_done = 0;

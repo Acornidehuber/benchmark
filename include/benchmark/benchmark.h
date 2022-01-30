@@ -1719,16 +1719,14 @@ class BENCHMARK_DEPRECATED_MSG(
 };
 
 inline TimeUnit GetStringTimeUnit(const char* unit) {
-  switch (unit) {
-    case "s":
-      return kSecond;
-    case "ms":
-      return kMillisecond;
-    case "us":
-      return kMicrosecond;
-    case "ns":
-      return kNanosecond;
-  }
+  if (unit == "s")
+    return kSecond;
+  else if (unit == "ms")
+    return kMillisecond;
+  else if (unit == "us")
+    return kMicrosecond;
+  else
+    return kNanosecond;
   BENCHMARK_UNREACHABLE();
 }
 
