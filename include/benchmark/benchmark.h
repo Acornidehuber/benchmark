@@ -1718,12 +1718,12 @@ class BENCHMARK_DEPRECATED_MSG(
   std::set<std::string> user_counter_names_;
 };
 
-inline TimeUnit GetStringTimeUnit(const char* unit) {
-  if (unit == "s")
+inline TimeUnit GetStringTimeUnit(std::string* unit) {
+  if (*unit == "s")
     return kSecond;
-  else if (unit == "ms")
+  else if (*unit == "ms")
     return kMillisecond;
-  else if (unit == "us")
+  else if (*unit == "us")
     return kMicrosecond;
   else
     return kNanosecond;
