@@ -124,7 +124,7 @@ BM_DEFINE_kvpairs(benchmark_context, {});
 // The level of verbose logging to output
 BM_DEFINE_int32(v, 0);
 
-// The time unit to use in report output
+// The default time unit to use in report output
 // Valid values are 'ns', 'us', 'ms', or 's'
 BM_DEFINE_string(benchmark_time_unit, "ns");
 

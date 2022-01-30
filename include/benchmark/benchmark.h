@@ -914,7 +914,8 @@ class Benchmark {
   // REQUIRES: The function passed to the constructor must accept an arg1.
   Benchmark* Arg(int64_t x);
 
-  // Run this benchmark with the given time unit for the generated output report
+  // Run this benchmark with the given time unit for the generated output report.
+  // This option overrides the 'benchmark_time_unit' flag.
   Benchmark* Unit(TimeUnit unit);
 
   // Run this benchmark once for a number of values picked from the
