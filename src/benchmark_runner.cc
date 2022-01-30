@@ -68,7 +68,7 @@ BenchmarkReporter::Run CreateRunReport(
     const internal::ThreadManager::Result& results,
     IterationCount memory_iterations,
     const MemoryManager::Result* memory_result, double seconds,
-    int64_t repetition_index, int64_t repeats) {
+    int64_t repetition_index, int64_t repeats, TimeUnit time_unit_) {
   // Create report about this benchmark run.
   BenchmarkReporter::Run report;
 
@@ -80,7 +80,7 @@ BenchmarkReporter::Run CreateRunReport(
   report.report_label = results.report_label_;
   // This is the total iterations across all threads.
   report.iterations = results.iterations;
-  report.time_unit = b.time_unit();
+  report.time_unit = time_unit_;
   report.threads = b.threads();
   report.repetition_index = repetition_index;
   report.repetitions = repeats;
@@ -146,9 +146,12 @@ BenchmarkRunner::BenchmarkRunner(
     BenchmarkReporter::PerFamilyRunReports* reports_for_family_)
     : b(b_),
       reports_for_family(reports_for_family_),
-      min_time(!IsZero(b.min_time()) ? b.min_time() : FLAGS_benchmark_min_time),
+      min_time(!IsZero(b.min_time()) ? b.min_time() 
+                                   : FLAGS_benchmark_min_time),
       repeats(b.repetitions() != 0 ? b.repetitions()
                                    : FLAGS_benchmark_repetitions),
+      time_unit_(b.time_unit() != kNanosecond ? b.time_unit()
+                                   : GetStringTimeUnit(&FLAGS_benchmark_time_unit)),
       has_explicit_iteration_count(b.iterations() != 0),
       pool(b.threads() - 1),
       iters(has_explicit_iteration_count ? b.iterations() : 1),
@@ -332,7 +335,7 @@ void BenchmarkRunner::DoOneRepetition() {
   // Ok, now actually report.
   BenchmarkReporter::Run report =
       CreateRunReport(b, i.results, memory_iterations, memory_result, i.seconds,
-                      num_repetitions_done, repeats);
+                      num_repetitions_done, repeats, time_unit_);
 
   if (reports_for_family) {
     ++reports_for_family->num_runs_done;

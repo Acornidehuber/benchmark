@@ -1718,6 +1718,20 @@ class BENCHMARK_DEPRECATED_MSG(
   std::set<std::string> user_counter_names_;
 };
 
+inline TimeUnit GetStringTimeUnit(const char* unit) {
+  switch (unit) {
+    case "s":
+      return kSecond;
+    case "ms":
+      return kMillisecond;
+    case "us":
+      return kMicrosecond;
+    case "ns":
+      return kNanosecond;
+  }
+  BENCHMARK_UNREACHABLE();
+}
+
 inline const char* GetTimeUnitString(TimeUnit unit) {
   switch (unit) {
     case kSecond:

@@ -30,6 +30,7 @@ BM_DECLARE_int32(benchmark_repetitions);
 BM_DECLARE_bool(benchmark_report_aggregates_only);
 BM_DECLARE_bool(benchmark_display_aggregates_only);
 BM_DECLARE_string(benchmark_perf_counters);
+BM_DECLARE_string(benchmark_time_unit);
 
 namespace internal {
 
