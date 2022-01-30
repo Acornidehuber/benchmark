@@ -508,7 +508,7 @@ typedef std::map<std::string, Counter> UserCounters;
 
 // TimeUnit is passed to a benchmark in order to specify the order of magnitude
 // for the measured time.
-enum TimeUnit { kNanosecond, kMicrosecond, kMillisecond, kSecond };
+enum TimeUnit { kNone, kNanosecond, kMicrosecond, kMillisecond, kSecond };
 
 // BigO is passed to a benchmark in order to specify the asymptotic
 // computational
@@ -1530,7 +1530,7 @@ class BenchmarkReporter {
           error_occurred(false),
           iterations(1),
           threads(1),
-          time_unit(kNanosecond),
+          time_unit(kNone),
           real_accumulated_time(0),
           cpu_accumulated_time(0),
           max_heapbytes_used(0),

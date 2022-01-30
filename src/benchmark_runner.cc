@@ -150,7 +150,7 @@ BenchmarkRunner::BenchmarkRunner(
                                    : FLAGS_benchmark_min_time),
       repeats(b.repetitions() != 0 ? b.repetitions()
                                    : FLAGS_benchmark_repetitions),
-      time_unit_(b.time_unit() != kNanosecond ? b.time_unit()
+      time_unit_(b.time_unit() != kNone ? b.time_unit()
                                    : GetStringTimeUnit(&FLAGS_benchmark_time_unit)),
       has_explicit_iteration_count(b.iterations() != 0),
       pool(b.threads() - 1),
