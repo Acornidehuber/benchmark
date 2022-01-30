@@ -124,6 +124,11 @@ BM_DEFINE_kvpairs(benchmark_context, {});
 // The level of verbose logging to output
 BM_DEFINE_int32(v, 0);
 
+// The global time unit to use in output
+// Valid values are 'ns', 'us', 'ms', or 's'
+// [CONSIDERATION]: Should override BENCHMARK()->Unit()
+BM_DEFINE_string(benchmark_time_unit, "");
+
 namespace internal {
 
 std::map<std::string, std::string>* global_context = nullptr;
@@ -548,6 +553,7 @@ void PrintUsageAndExit() {
           "          [--benchmark_counters_tabular={true|false}]\n"
           "          [--benchmark_perf_counters=<counter>,...]\n"
           "          [--benchmark_context=<key>=<value>,...]\n"
+          "          [--benchmark_time_unit=<ns|us|ms|s>]\n"        
           "          [--v=<verbosity>]\n");
   exit(0);
 }
@@ -581,6 +587,8 @@ void ParseCommandLineFlags(int* argc, char** argv) {
                         &FLAGS_benchmark_perf_counters) ||
         ParseKeyValueFlag(argv[i], "benchmark_context",
                           &FLAGS_benchmark_context) ||
+        ParseStringFlag(argv[i], "benchmark_time_unit",
+                          &FLAGS_benchmark_time_unit) ||
         ParseInt32Flag(argv[i], "v", &FLAGS_v)) {
       for (int j = i; j != *argc - 1; ++j) argv[j] = argv[j + 1];
 
